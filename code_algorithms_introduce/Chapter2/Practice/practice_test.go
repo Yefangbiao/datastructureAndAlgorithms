@@ -63,6 +63,45 @@ func TestMergeSort(t *testing.T) {
 	}
 }
 
+func TestBubbleSort(t *testing.T) {
+	arr := []int{5, 2, 4, 6, 1, 3}
+	want := []int{1, 2, 3, 4, 5, 6}
+	if got := BubbleSort(arr); !compareIntSlice(got, want) {
+		fmt.Printf("error! got :%v, want :%v", got, want)
+	}
+}
+
+func TestHorner(t *testing.T) {
+	arr := []int{5, 2, 4, 6, 1, 3}
+	x := 3
+	want := 1019
+	if got := Horner(arr, x); got != want {
+		fmt.Printf("error! got :%v, want :%v", got, want)
+	}
+}
+
+func TestCalMulti(t *testing.T) {
+	arr := []int{5, 2, 4, 6, 1, 3}
+	x := 3
+	want := 1019
+	if got := CalMulti(arr, x); got != want {
+		fmt.Printf("error! got :%v, want :%v", got, want)
+	}
+}
+
+func TestCountInversions(t *testing.T) {
+	arr := []int{2, 3, 8, 6, 1}
+	wantArr := []int{1, 2, 3, 6, 8}
+	wantNum := 5
+	got, res := CountInversions(arr)
+	if got != wantNum {
+		fmt.Printf("error! got :%v, want :%v", got, wantNum)
+	}
+	if !compareIntSlice(res, wantArr) {
+		fmt.Printf("error! got :%v, want :%v", res, wantNum)
+	}
+}
+
 func compareIntSlice(x, y []int) bool {
 	if len(x) != len(y) {
 		return false
