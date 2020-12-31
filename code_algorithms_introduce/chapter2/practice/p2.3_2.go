@@ -1,4 +1,4 @@
-package Practice
+package practice
 
 // 练习2.3-2
 // 归并排序

@@ -1,4 +1,4 @@
-package Practice
+package practice
 
 // 练习2.1-3
 func linearSearch(nums []int, v int) int {

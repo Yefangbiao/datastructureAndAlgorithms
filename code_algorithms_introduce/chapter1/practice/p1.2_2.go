@@ -1,4 +1,4 @@
-package Practice
+package practice
 
 // 使用二分法查找插入排序优于归并排序的时候的值
 // !! 由于存在精度损失,这应该是一个近似值

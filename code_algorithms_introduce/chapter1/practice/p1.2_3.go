@@ -1,4 +1,4 @@
-package Practice
+package practice
 
 // 使用二分法查找100n^2优于2^n的n
 // !!不存在精度损失,这是一个准确值

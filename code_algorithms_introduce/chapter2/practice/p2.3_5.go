@@ -1,4 +1,4 @@
-package Practice
+package practice
 
 // 练习2.3-5 二分查找
 // 返回要查找的数字位置,如果没有找到返回-1

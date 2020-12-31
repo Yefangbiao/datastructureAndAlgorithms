@@ -1,12 +1,11 @@
-package Chapter2
+package practice
 
-// 章节2.1插入算法,实现,原址算法
-
+// 练习2.1-2
 func insertSort(arr []int) []int {
 	for i := 1; i < len(arr); i++ {
 		key := arr[i]
 		j := i - 1
-		for j >= 0 && arr[j] > key {
+		for j >= 0 && arr[j] < key {
 			arr[j+1] = arr[j]
 			j--
 		}
