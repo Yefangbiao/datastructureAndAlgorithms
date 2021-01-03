@@ -23,6 +23,7 @@ func PopCount(x uint64) int {
 func PopCountAnd(x uint64) int {
 	ans := 0
 	for x != 0 {
+		ans++
 		x = x & (x - 1)
 	}
 	return ans
