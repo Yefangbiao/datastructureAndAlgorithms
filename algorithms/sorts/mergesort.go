@@ -30,6 +30,5 @@ func merge(left, right []int) []int {
 		ans[i+j] = right[j]
 		j++
 	}
-
 	return ans
 }
