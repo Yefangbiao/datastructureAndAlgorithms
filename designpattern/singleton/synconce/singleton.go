@@ -13,14 +13,10 @@ type singleton struct {
 var singletonInstance *singleton
 
 func GetSingletonInstance() *singleton {
-	if singletonInstance == nil {
-		lock.Do(func() {
-			fmt.Println("Creating single instance now.")
-			singletonInstance = &singleton{}
-
-		})
-	} else {
-		fmt.Println("Single instance already created.")
-	}
+	lock.Do(func() {
+		fmt.Println("Creating single instance now.")
+		singletonInstance = &singleton{}
+	})
+	fmt.Println("Single instance already created.")
 	return singletonInstance
 }
