@@ -32,6 +32,16 @@ func (b *binomialHeap) BinomialHeapExtractMin() *binomialNode {
 	min := b.binomialNodeMinimum()
 	minChild := min.binomialGetChild()
 
+	b.removeMinfromH(min)
+	// 新的H
+	b.binomialNode = b.binomialNode.binomialNodeUnion(minChild)
+
+	min.child = nil
+	min.sibling = nil
+	return min
+}
+
+func (b *binomialHeap) removeMinfromH(min *binomialNode) {
 	// 把min从H中移除
 	var prev *binomialNode
 	t := b.binomialNode
@@ -44,12 +54,6 @@ func (b *binomialHeap) BinomialHeapExtractMin() *binomialNode {
 	} else {
 		prev.sibling = min.sibling
 	}
-	// 新的H
-	b.binomialNode = b.binomialNode.binomialNodeUnion(minChild)
-
-	min.child = nil
-	min.sibling = nil
-	return min
 }
 
 // BinomialHeapDeCreaseKey 减小关键字的值
