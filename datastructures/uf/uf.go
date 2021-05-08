@@ -14,7 +14,7 @@ func Constructor(n int) uf {
 	newSZ := make([]int, n, n)
 	for i := 0; i < n; i++ {
 		newID[i] = i
-		newSZ[i] = i
+		newSZ[i] = 1
 	}
 	return uf{id: newID, count: n, sz: newSZ}
 }
