@@ -20,7 +20,7 @@ func main() {
 		return intStream
 	}
 
-	multipy := func(done <-chan interface{}, intStream <-chan int, multiplier int) <-chan int {
+	multiply := func(done <-chan interface{}, intStream <-chan int, multiplier int) <-chan int {
 		multipliedStream := make(chan int)
 		go func() {
 			defer close(multipliedStream)
@@ -54,7 +54,7 @@ func main() {
 	defer close(done)
 
 	intStream := generator(done, []int{2, 3, 4, 5}...)
-	pipeline := multipy(done, add(done, multipy(done, intStream, 4), 3), 2)
+	pipeline := multiply(done, add(done, multiply(done, intStream, 4), 3), 2)
 
 	for v := range pipeline {
 		fmt.Println(v)
