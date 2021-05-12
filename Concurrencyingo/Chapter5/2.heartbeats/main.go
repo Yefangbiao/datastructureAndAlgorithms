@@ -9,7 +9,7 @@ func main() {
 	done := make(chan interface{})
 	defer close(done)
 
-	heartBeat, resultStream := DoWork(done, 500*time.Millisecond, []int{2, 3, 4, 5}...)
+	heartBeat, resultStream := DoWork(done, 200*time.Millisecond, []int{2, 3, 4, 5}...)
 
 	for {
 		select {
@@ -31,47 +31,33 @@ func DoWork(done <-chan interface{}, pulseInterval time.Duration, nums ...int) (
 	heartBeats := make(chan interface{}, 1)
 	results := make(chan int)
 
-	tmpStream := make(chan int)
-
+	// 心跳用来确保还在执行
 	go func() {
-		defer close(heartBeats)
-		defer close(results)
 
-		pluse := time.Tick(pulseInterval)
-
+		pulse := time.Tick(pulseInterval)
 		for {
 			select {
 			case <-done:
 				return
-			case <-pluse:
+			case <-pulse:
 				select {
 				case heartBeats <- struct{}{}:
 				default:
 				}
-
-			case x, ok := <-tmpStream:
-				if !ok {
-					return
-				}
-				results <- x
 			}
 		}
-
 	}()
 
 	// 模拟处理函数
 	work := func() {
-		defer close(tmpStream)
-		i := 0
-		for {
+		defer close(results)
+		defer close(heartBeats)
+
+		for _, num := range nums {
 			select {
 			case <-done:
 				return
-			case tmpStream <- nums[i] * 2:
-				i++
-				if i >= len(nums) {
-					return
-				}
+			case results <- num * 2:
 				time.Sleep(2 * time.Second)
 			}
 		}
